@@ -1,9 +1,8 @@
-
 import { Component, OnInit } from "@angular/core";
 
 import { Router, ActivatedRoute } from "@angular/router";
 import { Vendor } from "src/app/vendor";
-import {UserService} from "../user-service.service";
+import { UserService } from "../user-service.service";
 
 @Component({
   selector: "app-user-list",
@@ -11,14 +10,14 @@ import {UserService} from "../user-service.service";
   styleUrls: ["./user-list.component.css"],
 })
 export class UserListComponent implements OnInit {
-  vendor: Vendor;
+  users: Vendor;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService
   ) {
-    this.vendor = new Vendor();
+    this.users = new Vendor();
   }
 
   ngOnInit() {
@@ -28,13 +27,13 @@ export class UserListComponent implements OnInit {
   }
 
   onReject() {
-    this.userService.remove(this.vendor);
+    this.userService.remove(this.users);
     this.gotoUserList();
   }
 
   onApprove() {
     this.userService
-      .save(this.vendor)
+      .save(this.users)
       .subscribe((result) => this.gotoUserList());
   }
 
